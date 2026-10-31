@@ -1,0 +1,69 @@
+{
+  "model_version": "full-20261031T151306Z-b6b9e1/lr_core",
+  "model": "lr_core",
+  "family": "lr",
+  "feature_set_version": "core_v1",
+  "features": [
+    "purchase_days_90d",
+    "avg_scaled_spend_per_purchase_day_90d",
+    "recency_days"
+  ],
+  "config": "C=0.01",
+  "params": {
+    "C": 0.01,
+    "solver": "lbfgs",
+    "max_iter": 2000
+  },
+  "param_derivation": {
+    "C": 0.01,
+    "source": "best mean development AP"
+  },
+  "raw_score_definition": "LogisticRegression.decision_function (log-odds)",
+  "dataset_id": "full_6114b4ad79",
+  "train_cutoffs": [
+    "2019-01-02",
+    "2019-02-01",
+    "2019-03-03",
+    "2019-04-02",
+    "2019-05-02",
+    "2019-06-01",
+    "2019-07-01",
+    "2019-07-31",
+    "2019-08-30",
+    "2019-09-29",
+    "2019-10-29",
+    "2019-11-28",
+    "2019-12-28",
+    "2020-01-27",
+    "2020-02-26",
+    "2020-03-27",
+    "2020-04-26",
+    "2020-05-26",
+    "2020-06-25"
+  ],
+  "max_train_label_end_exclusive": "2020-07-25",
+  "n_train": 9643114,
+  "train_prevalence": 0.33091623722378477,
+  "fit_info": {
+    "fit_seconds": 4.224091400001271,
+    "n_iter": 5,
+    "max_iter": 2000,
+    "converged": true,
+    "n_train": 9643114,
+    "coef": {
+      "purchase_days_90d": 0.6397191306419918,
+      "avg_scaled_spend_per_purchase_day_90d": 0.04333919702275462,
+      "recency_days": -0.1265504552301306
+    },
+    "intercept": -0.7589044932850336,
+    "scaler_mean": [
+      1.0378580409436173,
+      0.0913185538532862,
+      3.235732592618572
+    ]
+  },
+  "artifact": "artifacts/runs/full-20261031T151306Z-b6b9e1/models/lr_core.joblib",
+  "artifact_bytes": 2497,
+  "artifact_sha256": "d65724b9bec102ecd391ce3e9b4d21581aa4076660adb6c98de2b4387eef3582",
+  "frozen_at": "2026-10-31T16:59:23Z"
+}

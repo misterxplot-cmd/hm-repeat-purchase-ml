@@ -1,0 +1,8 @@
+# Text files are stored with LF.
+* text=auto eol=lf
+# Run artifacts are stored byte-for-byte: test_metrics.json records the sha256 of selection_decision.json.
+reports/runs/** -text
+*.png binary
+*.cbm binary
+*.joblib binary
+*.parquet binary

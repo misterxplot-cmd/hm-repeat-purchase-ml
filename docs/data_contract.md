@@ -6,7 +6,7 @@
   условия использования — [Competition Rules](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/rules).
 - Использованная копия: [microsoft/hnm-search-data](https://huggingface.co/datasets/microsoft/hnm-search-data),
   каталог `data/raw/`, ревизия `ac68fe6c5372c7f0bbfe0b7a6510f9e17addc81f`. Карточка набора ссылается на исходные
-  условия H&M/Kaggle.
+  условия H&M/Kaggle: «DATA ACCESS AND USE: Non-Commercial Purposes & Academic Research».
 - Контрольные суммы и размеры сверены с LFS-метаданными зеркала (Hugging Face tree API) и записаны в
   [`configs/full.yaml`](../configs/full.yaml) и `reports/data/ingest_manifest_full.json`.
 

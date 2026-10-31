@@ -1,0 +1,58 @@
+{
+  "run_id": "full-20261031T151306Z-b6b9e1",
+  "model": "catboost_core",
+  "model_version": "full-20261031T151306Z-b6b9e1/catboost_core",
+  "feature_set_version": "core_v1",
+  "as_of_date": "2020-08-24",
+  "horizon_days": 30,
+  "scored_at": "2026-10-31T17:09:40Z",
+  "n_scored": 539884,
+  "primary_budget": 0.05,
+  "k": 26995,
+  "ranking_source": "raw_score",
+  "primary_probability_field": "calibrated_probability",
+  "calibration_fallback_used": false,
+  "target_included": false,
+  "label_window_observed": true,
+  "validity_checks": {
+    "max_train_label_end_exclusive": "2020-07-25",
+    "calibration_target_end_exclusive": "2020-08-24",
+    "selection_label_end_exclusive": "2020-07-25",
+    "history_start": "2020-05-26",
+    "data_min_date": "2018-09-20",
+    "observation_end_exclusive": "2020-09-23",
+    "errors": [],
+    "valid": true
+  },
+  "feature_consistency_with_training_snapshot": {
+    "compared_with_snapshot": true,
+    "same_customers": true,
+    "max_abs_diff": 0.0
+  },
+  "output_file": "artifacts/runs/full-20261031T151306Z-b6b9e1/scoring/scores_catboost_core_asof_2020-08-24.csv",
+  "output_rows": 539884,
+  "output_sha256": "e82298f0fa49ffe50ee423055b5467ff88af4d7eb109302d5690e20f3a105c6a",
+  "columns": [
+    "customer_id",
+    "as_of_date",
+    "horizon_days",
+    "raw_score",
+    "raw_probability",
+    "calibrated_probability",
+    "rank",
+    "selected_for_top_segment",
+    "model_version",
+    "feature_set_version",
+    "run_id"
+  ],
+  "raw_score_quantiles": {
+    "0.01": -1.6070880027702477,
+    "0.25": -1.328738709568479,
+    "0.5": -0.8450593191878761,
+    "0.75": -0.273205572262432,
+    "0.95": 0.7098170350440172,
+    "0.99": 1.7440837507971738
+  },
+  "calibrated_probability_mean": 0.31803180975361584,
+  "top_segment_calibrated_probability_mean": 0.7585952236299265
+}

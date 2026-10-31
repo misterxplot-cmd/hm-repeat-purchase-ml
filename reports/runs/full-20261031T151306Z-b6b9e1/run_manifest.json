@@ -1,0 +1,185 @@
+{
+  "run_id": "full-20261031T151306Z-b6b9e1",
+  "created_at": "2026-10-31T15:13:06Z",
+  "mode": "full",
+  "dataset_id": "full_6114b4ad79",
+  "config_file": "configs/full.yaml",
+  "config": {
+    "mode": "full",
+    "seed": 20240917,
+    "data": {
+      "dir": "data/raw",
+      "files": {
+        "transactions": "transactions_train.csv",
+        "customers": "customers.csv",
+        "articles": "articles.csv"
+      },
+      "source": {
+        "origin": "https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data",
+        "rules": "https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/rules",
+        "mirror": "https://huggingface.co/datasets/microsoft/hnm-search-data",
+        "mirror_revision": "ac68fe6c5372c7f0bbfe0b7a6510f9e17addc81f",
+        "urls": {
+          "transactions": "https://huggingface.co/datasets/microsoft/hnm-search-data/resolve/main/data/raw/transactions_train.csv",
+          "customers": "https://huggingface.co/datasets/microsoft/hnm-search-data/resolve/main/data/raw/customers.csv",
+          "articles": "https://huggingface.co/datasets/microsoft/hnm-search-data/resolve/main/data/raw/articles.csv"
+        },
+        "expected": {
+          "transactions": {
+            "sha256": "fff5e3b35c1b26016aa0bf2231be9525bc766eed32c94f1653420b465aef84fa",
+            "size_bytes": 3488002253
+          },
+          "customers": {
+            "sha256": "abf3450c37ee1c16124e0d3379371153f5371148742efdcfe44c97c0445df6b2",
+            "size_bytes": 207135859
+          },
+          "articles": {
+            "sha256": "25f21882053517f7684ea43f524225a9481a7bb9aab9cf0abfc7fe8c4576a72b",
+            "size_bytes": 36127865
+          }
+        }
+      }
+    },
+    "dataset": {
+      "sample_fraction": 1.0,
+      "hash_salt": "hmrp-sample-v1",
+      "hash_buckets": 10000
+    },
+    "time": {
+      "history_days": 90,
+      "horizon_days": 30,
+      "step_days": 30,
+      "grid_start": "2019-01-02",
+      "grid_end": "2020-08-24",
+      "dev_validation_cutoffs": [
+        "2020-04-26",
+        "2020-05-26",
+        "2020-06-25"
+      ],
+      "calibration_cutoff": "2020-07-25",
+      "test_cutoff": "2020-08-24",
+      "truncation_ratio_threshold": 0.5
+    },
+    "models": {
+      "candidates": [
+        "lr_core",
+        "catboost_core",
+        "catboost_ext"
+      ],
+      "diagnostics": [
+        "lr_ext"
+      ],
+      "lr": {
+        "C_grid": [
+          0.01,
+          0.1,
+          1.0
+        ],
+        "max_iter": 2000,
+        "solver": "lbfgs"
+      },
+      "catboost": {
+        "max_iterations": 3000,
+        "early_stopping_rounds": 100,
+        "eval_metric": "Logloss",
+        "configs": [
+          {
+            "name": "d4_lr0.10_l2_3",
+            "depth": 4,
+            "learning_rate": 0.1,
+            "l2_leaf_reg": 3
+          },
+          {
+            "name": "d6_lr0.10_l2_3",
+            "depth": 6,
+            "learning_rate": 0.1,
+            "l2_leaf_reg": 3
+          },
+          {
+            "name": "d6_lr0.05_l2_10",
+            "depth": 6,
+            "learning_rate": 0.05,
+            "l2_leaf_reg": 10
+          },
+          {
+            "name": "d8_lr0.10_l2_10",
+            "depth": 8,
+            "learning_rate": 0.1,
+            "l2_leaf_reg": 10
+          }
+        ]
+      }
+    },
+    "selection": {
+      "metric": "average_precision",
+      "tolerance": 0.005,
+      "priority": [
+        "lr_core",
+        "catboost_core",
+        "catboost_ext"
+      ]
+    },
+    "evaluation": {
+      "budgets": [
+        0.01,
+        0.05,
+        0.1
+      ],
+      "primary_budget": 0.05,
+      "tie_salt": "hmrp-tie-v1"
+    },
+    "calibration": {
+      "method": "platt",
+      "min_class_count": 50
+    },
+    "bootstrap": {
+      "n_resamples": 500,
+      "seed": 7
+    },
+    "resources": {
+      "catboost_threads": 16,
+      "task_type": "CPU"
+    },
+    "sql": {
+      "explain_analyze_heavy": true
+    },
+    "outputs": {
+      "reports_dir": "reports",
+      "artifacts_dir": "artifacts",
+      "derived_dir": "data/derived"
+    }
+  },
+  "config_fingerprint": "b6b9e1534f98",
+  "git": {
+    "commit": "39626a10679a89729a17620d3706e477435a3076",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "cpu_logical": 24,
+    "ram_total_gb": 63.8,
+    "packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.2.3",
+      "scipy": "1.15.2",
+      "scikit-learn": "1.6.1",
+      "catboost": "1.2.8",
+      "psycopg": "3.2.6",
+      "psycopg-binary": "3.2.6",
+      "pyarrow": "19.0.1",
+      "matplotlib": "3.10.1",
+      "seaborn": "0.13.2",
+      "PyYAML": "6.0.2",
+      "psutil": "7.0.0"
+    },
+    "compute": {
+      "catboost_task_type": "CPU",
+      "catboost_threads": 16
+    }
+  },
+  "seed": 20240917,
+  "dataset_summary": "reports/data/full_6114b4ad79/dataset_summary.json",
+  "source_manifest": "reports/data/ingest_manifest_full.json"
+}

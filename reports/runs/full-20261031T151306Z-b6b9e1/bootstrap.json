@@ -1,0 +1,114 @@
+{
+  "n_resamples_requested": 500,
+  "n_resamples_used": 500,
+  "n_skipped_single_class": 0,
+  "seed": 7,
+  "share": 0.05,
+  "cluster": "customer (one row per customer in the final test slice)",
+  "interval": "percentile 2.5-97.5",
+  "models": {
+    "catboost_core": {
+      "average_precision": {
+        "low": 0.5319981926634636,
+        "high": 0.536916153979445,
+        "mean": 0.5345024328701468,
+        "n": 500
+      },
+      "roc_auc": {
+        "low": 0.6860326083727697,
+        "high": 0.6893490176853365,
+        "mean": 0.6876620371176128,
+        "n": 500
+      },
+      "precision_at": {
+        "low": 0.7456566030746434,
+        "high": 0.7563308020003704,
+        "mean": 0.7510062604185961,
+        "n": 500
+      }
+    },
+    "recency_baseline": {
+      "average_precision": {
+        "low": 0.40325494303567216,
+        "high": 0.4076557850377791,
+        "mean": 0.40530568227794705,
+        "n": 500
+      },
+      "roc_auc": {
+        "low": 0.6128606856733293,
+        "high": 0.6159597995481216,
+        "mean": 0.6143721614939728,
+        "n": 500
+      },
+      "precision_at": {
+        "low": 0.4839942581959622,
+        "high": 0.4960835339877755,
+        "mean": 0.4900374143359882,
+        "n": 500
+      }
+    },
+    "lr_core": {
+      "average_precision": {
+        "low": 0.530578975233638,
+        "high": 0.5354264859508948,
+        "mean": 0.5330426224934492,
+        "n": 500
+      },
+      "roc_auc": {
+        "low": 0.683797655200378,
+        "high": 0.6871101426609696,
+        "mean": 0.6854672152756345,
+        "n": 500
+      },
+      "precision_at": {
+        "low": 0.7444711983700685,
+        "high": 0.755418596036303,
+        "mean": 0.7502045563993333,
+        "n": 500
+      }
+    }
+  },
+  "differences": {
+    "catboost_core_minus_recency_baseline": {
+      "average_precision": {
+        "low": 0.12705958381721297,
+        "high": 0.13115105867105328,
+        "mean": 0.1291967505921997,
+        "n": 500
+      },
+      "roc_auc": {
+        "low": 0.0717835628203976,
+        "high": 0.07456908451278738,
+        "mean": 0.07328987562363995,
+        "n": 500
+      },
+      "precision_at": {
+        "low": 0.25391646601222445,
+        "high": 0.268369142433784,
+        "mean": 0.2609688460826079,
+        "n": 500
+      }
+    },
+    "lr_core_minus_catboost_core": {
+      "average_precision": {
+        "low": -0.0017529491330405933,
+        "high": -0.0011567544880712766,
+        "mean": -0.0014598103766973898,
+        "n": 500
+      },
+      "roc_auc": {
+        "low": -0.002610274212868388,
+        "high": -0.0017543540484419224,
+        "mean": -0.002194821841978203,
+        "n": 500
+      },
+      "precision_at": {
+        "low": -0.002871828116317843,
+        "high": 0.0010566771624374353,
+        "mean": -0.0008017040192628267,
+        "n": 500
+      }
+    }
+  },
+  "note": "customer-level resampling within one test period; does not cover uncertainty from future temporal shift"
+}

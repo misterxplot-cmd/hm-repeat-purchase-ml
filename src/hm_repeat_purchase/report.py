@@ -67,6 +67,8 @@ def load_run(config: Config, run_id: str) -> dict[str, Any]:
         p = pub / f"{name}.csv"
         run[name] = pd.read_csv(p) if p.exists() else None
     run["scoring"] = [read_json(p) for p in sorted((pub / "scoring").glob("*.json"))] if (pub / "scoring").exists() else []
+    run["models_meta"] = {p.name.split(".")[0]: read_json(p) for p in sorted((pub / "models").glob("*.meta.json"))} \
+        if (pub / "models").exists() else {}
     ds = (run["selection_decision"] or {}).get("dataset_id") or (run["run_manifest"] or {}).get("dataset_id")
     run["dataset_id"] = ds
     sp = config.reports_dir / "data" / ds / "dataset_summary.json" if ds else None
@@ -176,6 +178,77 @@ def block_bootstrap(run: dict) -> str:
                          "Отн. изменение P@5%"], rows)
 
 
+def _ci_phrase(ci: dict) -> str:
+    if ci["low"] is None:
+        return "не оценён"
+    if ci["low"] > 0 or ci["high"] < 0:
+        return "не включает 0"
+    return "включает 0 (разница не различима)"
+
+
+def block_interpretation(run: dict) -> str:
+    """Conclusions stated only through numbers read from the run artifacts."""
+    dec, t, b = run["selection_decision"], run["test_metrics"], run["bootstrap"]
+    sel = dec["selected_model"]
+    scores = dec["development_scores"]
+    tol = float(dec["rule"]["near_best"].split("- ")[1].split(" ")[0])
+    threshold = dec["max_ap"] - tol
+    excluded = [c for c in dec["candidates"] if c not in dec["near_best"]]
+    m = t["models"]
+    base = m["recency_baseline"]
+    lines = [f"- **Выбор.** Порог near_best = max mean AP − {tol} = {f4(threshold)}. "
+             + "; ".join(f"`{c}`: mean AP {f4(scores[c]['mean_ap'])}" for c in dec["candidates"]) + ". "
+             + (f"Вне near_best: {', '.join(f'`{c}`' for c in excluded)}. " if excluded else "")
+             + f"По приоритету простоты выбрана `{sel}`; правило зафиксировано в конфигурации до запуска, решение — "
+               "до чтения меток test."]
+    d = b["differences"].get(f"{sel}_minus_recency_baseline")
+    if d:
+        p_sel, p_base = m[sel]["at_budget"]["top_5pct"]["precision"], base["at_budget"]["top_5pct"]["precision"]
+        lines.append(
+            f"- **Против baseline (final test).** `{sel}`: AP {f4(m[sel]['average_precision'])} против "
+            f"{f4(base['average_precision'])} (Δ {f4(m[sel]['average_precision'] - base['average_precision'])}, 95% ДИ "
+            f"[{f4(d['average_precision']['low'])}; {f4(d['average_precision']['high'])}]); Precision@5% "
+            f"{pct(p_sel)} против {pct(p_base)} ({100 * (p_sel - p_base):+.2f} п.п., относительно {100 * (p_sel / p_base - 1):+.1f}%). "
+            "Интервалы по клиентам одного периода.")
+    d2 = b["differences"].get("lr_core_minus_catboost_core")
+    if d2:
+        lines.append(
+            f"- **LR-core против CatBoost-core** (одинаковые три признака): на test ΔAP = "
+            f"{f4(m['lr_core']['average_precision'] - m['catboost_core']['average_precision'])} "
+            f"[{f4(d2['average_precision']['low'])}; {f4(d2['average_precision']['high'])}], ΔPrecision@5% = "
+            f"{100 * (m['lr_core']['at_budget']['top_5pct']['precision'] - m['catboost_core']['at_budget']['top_5pct']['precision']):+.2f} п.п. "
+            f"[{100 * d2['precision_at']['low']:+.2f}; {100 * d2['precision_at']['high']:+.2f}]. "
+            f"По AP интервал {_ci_phrase(d2['average_precision'])}; по Precision@5% — {_ci_phrase(d2['precision_at'])}.")
+    if "catboost_ext" in m and "lr_ext" in scores:
+        lines.append(
+            f"- **Эффект признаков (абляция на dev, mean AP).** LR: core {f4(scores['lr_core']['mean_ap'])} → ext "
+            f"{f4(scores['lr_ext']['mean_ap'])}; CatBoost: core {f4(scores['catboost_core']['mean_ap'])} → ext "
+            f"{f4(scores['catboost_ext']['mean_ap'])} (Δ {f4(scores['lr_ext']['mean_ap'] - scores['lr_core']['mean_ap'])} и "
+            f"{f4(scores['catboost_ext']['mean_ap'] - scores['catboost_core']['mean_ap'])}). На test `catboost_ext` получил AP {f4(m['catboost_ext']['average_precision'])}; он не выбран "
+            "правилом, результат показан для прозрачности и выбор задним числом не меняется.")
+    cal = run["calibration"]["models"].get(sel, {})
+    if cal:
+        lines.append(
+            f"- **Калибровка.** У `{sel}` наклон Platt a = {cal['params'].get('a', float('nan')):.4f}"
+            + (": исходные вероятности уже близки к калиброванным" if abs(cal["params"].get("a", 0) - 1) < 0.05 else "")
+            + f"; "
+            f"Brier на test {f4(m[sel]['raw_probability']['brier'])} → "
+            f"{f4(m[sel]['calibrated_probability']['brier'])}, LogLoss {f4(m[sel]['raw_probability']['log_loss'])} → "
+            f"{f4(m[sel]['calibrated_probability']['log_loss'])}.")
+    deriv = (run["models_meta"].get(sel) or {}).get("param_derivation", {})
+    if deriv.get("best_iteration_per_fold"):
+        lines.append(
+            f"- **Нестабильность early stopping.** best_iteration `{sel}` по fold: "
+            f"{', '.join(map(str, deriv['best_iteration_per_fold']))}; число деревьев final refit = {deriv['iterations']} "
+            "(медиана, правило задано заранее); AP по fold — в таблице development.")
+    better = bool(d) and d["average_precision"]["low"] is not None and d["average_precision"]["low"] > 0
+    lines.append("- **Статус.** " + (f"`{sel}` ранжирует лучше recency baseline (нижняя граница ΔAP > 0)" if better else
+                 f"`{sel}` не показал устойчивого преимущества над recency baseline (интервал ΔAP включает 0 или ниже)")
+                 + "; это прогноз наблюдаемой покупки на одном тестовом периоде. Эффект CRM-контакта и устойчивость на "
+                 "других сезонах не проверены, готовность к внедрению не заявляется.")
+    return "\n".join(lines)
+
+
 def block_calibration(run: dict) -> str:
     c = run["calibration"]
     rows = []
@@ -280,7 +353,8 @@ def results_md(config: Config, run: dict, figs: dict[str, Path], out: Path) -> s
         parts += ["## Final test", "", block_test(run), "",
                   "Ранжирующие метрики (AP, ROC-AUC, Precision/Lift) считаются по `raw_score`; Brier/LogLoss — по "
                   "вероятностям; у baseline вероятности нет (not_applicable).", "",
-                  "## Bootstrap-интервалы", "", block_bootstrap(run), ""]
+                  "## Bootstrap-интервалы", "", block_bootstrap(run), "",
+                  "## Выводы", "", block_interpretation(run), ""]
     if run["scoring"]:
         parts += ["## Batch scoring", "", block_scoring(run), ""]
     parts += ["## Графики", ""]
@@ -478,8 +552,11 @@ def update_readme(config: Config) -> list[str]:
         if r["test_metrics"]:
             text = _replace_block(text, f"{mode}:test", block_test(r))
             text = _replace_block(text, f"{mode}:bootstrap", block_bootstrap(r))
+            text = _replace_block(text, f"{mode}:interpretation", block_interpretation(r))
         if r["calibration"]:
             text = _replace_block(text, f"{mode}:calibration", block_calibration(r))
+        if r["scoring"]:
+            text = _replace_block(text, f"{mode}:scoring", block_scoring(r))
         changed.append(mode)
     readme.write_text(text, encoding="utf-8")
     return changed

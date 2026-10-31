@@ -1,0 +1,111 @@
+{
+  "run_id": "full-20261031T151306Z-b6b9e1",
+  "method": "platt_sigmoid_on_raw_score",
+  "calibration_window": {
+    "cutoff_date": "2020-07-25",
+    "history_start": "2020-04-26",
+    "history_end_exclusive": "2020-07-25",
+    "target_start": "2020-07-25",
+    "target_end_exclusive": "2020-08-24"
+  },
+  "calibration_target_end_exclusive": "2020-08-24",
+  "n": 536041,
+  "n_positive": 170570,
+  "prevalence": 0.3182032717646598,
+  "models": {
+    "lr_core": {
+      "model_version": "full-20261031T151306Z-b6b9e1/lr_core",
+      "params": {
+        "n": 536041,
+        "n_positive": 170570,
+        "n_negative": 365471,
+        "min_class_count": 50,
+        "status": "ok",
+        "a": 1.0086209811879843,
+        "b": -0.09465496950439203,
+        "n_iter": 6
+      },
+      "primary_probability": "calibrated_probability",
+      "fallback_used": false,
+      "calibration_slice_metrics": {
+        "average_precision": 0.5396776652930189,
+        "roc_auc": 0.687481531843327,
+        "raw_probability": {
+          "brier": 0.19287854398910798,
+          "mean_predicted": 0.33775981963970453,
+          "status": "ok",
+          "log_loss": 0.5713072085204632
+        },
+        "calibrated_probability": {
+          "brier": 0.19245807113870997,
+          "mean_predicted": 0.3181672900347796,
+          "status": "ok",
+          "log_loss": 0.5703319745545078
+        }
+      }
+    },
+    "catboost_core": {
+      "model_version": "full-20261031T151306Z-b6b9e1/catboost_core",
+      "params": {
+        "n": 536041,
+        "n_positive": 170570,
+        "n_negative": 365471,
+        "min_class_count": 50,
+        "status": "ok",
+        "a": 1.0055137994224497,
+        "b": -0.10248091275661383,
+        "n_iter": 6
+      },
+      "primary_probability": "calibrated_probability",
+      "fallback_used": false,
+      "calibration_slice_metrics": {
+        "average_precision": 0.5411291011588361,
+        "roc_auc": 0.690899105159367,
+        "raw_probability": {
+          "brier": 0.19252500826105312,
+          "mean_predicted": 0.3388769325666412,
+          "status": "ok",
+          "log_loss": 0.5703116729742388
+        },
+        "calibrated_probability": {
+          "brier": 0.1920768227250098,
+          "mean_predicted": 0.3181669367880526,
+          "status": "ok",
+          "log_loss": 0.5692230931739813
+        }
+      }
+    },
+    "catboost_ext": {
+      "model_version": "full-20261031T151306Z-b6b9e1/catboost_ext",
+      "params": {
+        "n": 536041,
+        "n_positive": 170570,
+        "n_negative": 365471,
+        "min_class_count": 50,
+        "status": "ok",
+        "a": 1.0130691254583897,
+        "b": -0.08151297833630786,
+        "n_iter": 6
+      },
+      "primary_probability": "calibrated_probability",
+      "fallback_used": false,
+      "calibration_slice_metrics": {
+        "average_precision": 0.5445051756917239,
+        "roc_auc": 0.6983918986043688,
+        "raw_probability": {
+          "brier": 0.19147349225542393,
+          "mean_predicted": 0.33561951977479254,
+          "status": "ok",
+          "log_loss": 0.5673299339246977
+        },
+        "calibrated_probability": {
+          "brier": 0.19116391966593005,
+          "mean_predicted": 0.31817201237706505,
+          "status": "ok",
+          "log_loss": 0.5665445106255211
+        }
+      }
+    }
+  },
+  "fitted_at": "2026-10-31T17:08:41Z"
+}
