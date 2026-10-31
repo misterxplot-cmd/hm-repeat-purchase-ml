@@ -78,7 +78,7 @@ bootstrap:
   seed: 7
 
 resources:
-  catboost_threads: 8
+  catboost_threads: 16
   task_type: CPU
 
 sql:
