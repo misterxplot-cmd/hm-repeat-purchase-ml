@@ -1,0 +1,566 @@
+{
+  "dataset_id": "smoke_dfa33f484c",
+  "action": "built",
+  "built_at": "2026-10-31T14:52:38Z",
+  "identity": {
+    "mode": "smoke",
+    "sources": {
+      "articles": {
+        "sha256": "25f21882053517f7684ea43f524225a9481a7bb9aab9cf0abfc7fe8c4576a72b",
+        "ingest_schema": "hmrp_ingest_v1",
+        "load_id": 3,
+        "rows_loaded": 105542
+      },
+      "customers": {
+        "sha256": "abf3450c37ee1c16124e0d3379371153f5371148742efdcfe44c97c0445df6b2",
+        "ingest_schema": "hmrp_ingest_v1",
+        "load_id": 2,
+        "rows_loaded": 1371980
+      },
+      "transactions": {
+        "sha256": "fff5e3b35c1b26016aa0bf2231be9525bc766eed32c94f1653420b465aef84fa",
+        "ingest_schema": "hmrp_ingest_v1",
+        "load_id": 1,
+        "rows_loaded": 31788324
+      }
+    },
+    "sampling": {
+      "fraction": 0.01,
+      "hash_rule": "int(sha256(salt + ':' + customer_id).hex[:8], 16) % buckets < threshold",
+      "salt": "hmrp-sample-v1",
+      "buckets": 10000,
+      "threshold": 100
+    },
+    "feature_build_version": "snap_v1",
+    "time": {
+      "history_days": 90,
+      "horizon_days": 30,
+      "step_days": 30,
+      "grid_start": "2019-01-02",
+      "grid_end": "2020-08-24"
+    }
+  },
+  "coverage": {
+    "min_date": "2018-09-20",
+    "max_date": "2020-09-22",
+    "n_dates_with_rows": 734,
+    "n_calendar_days": 734,
+    "missing_dates": [],
+    "low_volume_days_ratio_below_0_5": {
+      "2018-12-25": 0.431,
+      "2019-12-25": 0.414,
+      "2020-01-01": 0.405
+    },
+    "last_day_rows": 32866,
+    "last_day_ratio_to_trailing_28d_median": 0.8502282986897078,
+    "observation_end_exclusive": "2020-09-23",
+    "observation_end_decision": "max(t_dat) + 1 day: no missing dates and the last day is not truncated",
+    "truncation_ratio_threshold": 0.5
+  },
+  "calendar": [
+    {
+      "cutoff_date": "2018-12-03",
+      "history_start": "2018-09-04",
+      "history_end_exclusive": "2018-12-03",
+      "target_start": "2018-12-03",
+      "target_end_exclusive": "2019-01-02",
+      "role": "probe",
+      "is_eligible": false,
+      "eligibility_reason": "insufficient_history: history_start 2018-09-04 < data_start 2018-09-20"
+    },
+    {
+      "cutoff_date": "2019-01-02",
+      "history_start": "2018-10-04",
+      "history_end_exclusive": "2019-01-02",
+      "target_start": "2019-01-02",
+      "target_end_exclusive": "2019-02-01",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-02-01",
+      "history_start": "2018-11-03",
+      "history_end_exclusive": "2019-02-01",
+      "target_start": "2019-02-01",
+      "target_end_exclusive": "2019-03-03",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-03-03",
+      "history_start": "2018-12-03",
+      "history_end_exclusive": "2019-03-03",
+      "target_start": "2019-03-03",
+      "target_end_exclusive": "2019-04-02",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-04-02",
+      "history_start": "2019-01-02",
+      "history_end_exclusive": "2019-04-02",
+      "target_start": "2019-04-02",
+      "target_end_exclusive": "2019-05-02",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-05-02",
+      "history_start": "2019-02-01",
+      "history_end_exclusive": "2019-05-02",
+      "target_start": "2019-05-02",
+      "target_end_exclusive": "2019-06-01",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-06-01",
+      "history_start": "2019-03-03",
+      "history_end_exclusive": "2019-06-01",
+      "target_start": "2019-06-01",
+      "target_end_exclusive": "2019-07-01",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-07-01",
+      "history_start": "2019-04-02",
+      "history_end_exclusive": "2019-07-01",
+      "target_start": "2019-07-01",
+      "target_end_exclusive": "2019-07-31",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-07-31",
+      "history_start": "2019-05-02",
+      "history_end_exclusive": "2019-07-31",
+      "target_start": "2019-07-31",
+      "target_end_exclusive": "2019-08-30",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-08-30",
+      "history_start": "2019-06-01",
+      "history_end_exclusive": "2019-08-30",
+      "target_start": "2019-08-30",
+      "target_end_exclusive": "2019-09-29",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-09-29",
+      "history_start": "2019-07-01",
+      "history_end_exclusive": "2019-09-29",
+      "target_start": "2019-09-29",
+      "target_end_exclusive": "2019-10-29",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-10-29",
+      "history_start": "2019-07-31",
+      "history_end_exclusive": "2019-10-29",
+      "target_start": "2019-10-29",
+      "target_end_exclusive": "2019-11-28",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-11-28",
+      "history_start": "2019-08-30",
+      "history_end_exclusive": "2019-11-28",
+      "target_start": "2019-11-28",
+      "target_end_exclusive": "2019-12-28",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2019-12-28",
+      "history_start": "2019-09-29",
+      "history_end_exclusive": "2019-12-28",
+      "target_start": "2019-12-28",
+      "target_end_exclusive": "2020-01-27",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-01-27",
+      "history_start": "2019-10-29",
+      "history_end_exclusive": "2020-01-27",
+      "target_start": "2020-01-27",
+      "target_end_exclusive": "2020-02-26",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-02-26",
+      "history_start": "2019-11-28",
+      "history_end_exclusive": "2020-02-26",
+      "target_start": "2020-02-26",
+      "target_end_exclusive": "2020-03-27",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-03-27",
+      "history_start": "2019-12-28",
+      "history_end_exclusive": "2020-03-27",
+      "target_start": "2020-03-27",
+      "target_end_exclusive": "2020-04-26",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-04-26",
+      "history_start": "2020-01-27",
+      "history_end_exclusive": "2020-04-26",
+      "target_start": "2020-04-26",
+      "target_end_exclusive": "2020-05-26",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-05-26",
+      "history_start": "2020-02-26",
+      "history_end_exclusive": "2020-05-26",
+      "target_start": "2020-05-26",
+      "target_end_exclusive": "2020-06-25",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-06-25",
+      "history_start": "2020-03-27",
+      "history_end_exclusive": "2020-06-25",
+      "target_start": "2020-06-25",
+      "target_end_exclusive": "2020-07-25",
+      "role": "development",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-07-25",
+      "history_start": "2020-04-26",
+      "history_end_exclusive": "2020-07-25",
+      "target_start": "2020-07-25",
+      "target_end_exclusive": "2020-08-24",
+      "role": "calibration",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-08-24",
+      "history_start": "2020-05-26",
+      "history_end_exclusive": "2020-08-24",
+      "target_start": "2020-08-24",
+      "target_end_exclusive": "2020-09-23",
+      "role": "test",
+      "is_eligible": true,
+      "eligibility_reason": "eligible"
+    },
+    {
+      "cutoff_date": "2020-09-23",
+      "history_start": "2020-06-25",
+      "history_end_exclusive": "2020-09-23",
+      "target_start": "2020-09-23",
+      "target_end_exclusive": "2020-10-23",
+      "role": "probe",
+      "is_eligible": false,
+      "eligibility_reason": "target_window_incomplete: target_end_exclusive 2020-10-23 > observation_end_exclusive 2020-09-23"
+    }
+  ],
+  "cohort_by_cutoff": [
+    {
+      "cutoff_date": "2019-01-02",
+      "role": "development",
+      "n_rows": 5393,
+      "n_customers": 5393,
+      "n_positive": 1692,
+      "prevalence": 0.3137400333765993
+    },
+    {
+      "cutoff_date": "2019-02-01",
+      "role": "development",
+      "n_rows": 5226,
+      "n_customers": 5226,
+      "n_positive": 1666,
+      "prevalence": 0.31879066207424417
+    },
+    {
+      "cutoff_date": "2019-03-03",
+      "role": "development",
+      "n_rows": 5167,
+      "n_customers": 5167,
+      "n_positive": 1612,
+      "prevalence": 0.3119798722663054
+    },
+    {
+      "cutoff_date": "2019-04-02",
+      "role": "development",
+      "n_rows": 5064,
+      "n_customers": 5064,
+      "n_positive": 1734,
+      "prevalence": 0.3424170616113744
+    },
+    {
+      "cutoff_date": "2019-05-02",
+      "role": "development",
+      "n_rows": 5116,
+      "n_customers": 5116,
+      "n_positive": 1750,
+      "prevalence": 0.3420641125879593
+    },
+    {
+      "cutoff_date": "2019-06-01",
+      "role": "development",
+      "n_rows": 5084,
+      "n_customers": 5084,
+      "n_positive": 2003,
+      "prevalence": 0.39398111723052714
+    },
+    {
+      "cutoff_date": "2019-07-01",
+      "role": "development",
+      "n_rows": 5430,
+      "n_customers": 5430,
+      "n_positive": 2069,
+      "prevalence": 0.38103130755064457
+    },
+    {
+      "cutoff_date": "2019-07-31",
+      "role": "development",
+      "n_rows": 5562,
+      "n_customers": 5562,
+      "n_positive": 1728,
+      "prevalence": 0.3106796116504854
+    },
+    {
+      "cutoff_date": "2019-08-30",
+      "role": "development",
+      "n_rows": 5382,
+      "n_customers": 5382,
+      "n_positive": 1735,
+      "prevalence": 0.3223708658491267
+    },
+    {
+      "cutoff_date": "2019-09-29",
+      "role": "development",
+      "n_rows": 5179,
+      "n_customers": 5179,
+      "n_positive": 1762,
+      "prevalence": 0.34022011971423055
+    },
+    {
+      "cutoff_date": "2019-10-29",
+      "role": "development",
+      "n_rows": 4939,
+      "n_customers": 4939,
+      "n_positive": 1606,
+      "prevalence": 0.32516703786191536
+    },
+    {
+      "cutoff_date": "2019-11-28",
+      "role": "development",
+      "n_rows": 4887,
+      "n_customers": 4887,
+      "n_positive": 1878,
+      "prevalence": 0.3842848373235114
+    },
+    {
+      "cutoff_date": "2019-12-28",
+      "role": "development",
+      "n_rows": 5185,
+      "n_customers": 5185,
+      "n_positive": 1552,
+      "prevalence": 0.29932497589199614
+    },
+    {
+      "cutoff_date": "2020-01-27",
+      "role": "development",
+      "n_rows": 5120,
+      "n_customers": 5120,
+      "n_positive": 1498,
+      "prevalence": 0.292578125
+    },
+    {
+      "cutoff_date": "2020-02-26",
+      "role": "development",
+      "n_rows": 5130,
+      "n_customers": 5130,
+      "n_positive": 1464,
+      "prevalence": 0.28538011695906434
+    },
+    {
+      "cutoff_date": "2020-03-27",
+      "role": "development",
+      "n_rows": 4667,
+      "n_customers": 4667,
+      "n_positive": 1228,
+      "prevalence": 0.2631240625669595
+    },
+    {
+      "cutoff_date": "2020-04-26",
+      "role": "development",
+      "n_rows": 4812,
+      "n_customers": 4812,
+      "n_positive": 1374,
+      "prevalence": 0.2855361596009975
+    },
+    {
+      "cutoff_date": "2020-05-26",
+      "role": "development",
+      "n_rows": 4762,
+      "n_customers": 4762,
+      "n_positive": 1744,
+      "prevalence": 0.36623267534649306
+    },
+    {
+      "cutoff_date": "2020-06-25",
+      "role": "development",
+      "n_rows": 5231,
+      "n_customers": 5231,
+      "n_positive": 1771,
+      "prevalence": 0.33855859300324986
+    },
+    {
+      "cutoff_date": "2020-07-25",
+      "role": "calibration",
+      "n_rows": 5404,
+      "n_customers": 5404,
+      "n_positive": 1675,
+      "prevalence": 0.30995558845299775
+    },
+    {
+      "cutoff_date": "2020-08-24",
+      "role": "test",
+      "n_rows": 5486,
+      "n_customers": 5486,
+      "n_positive": 1673,
+      "prevalence": 0.3049580751002552
+    }
+  ],
+  "n_snapshot_rows_total": 108226,
+  "checks": {
+    "customer_day_reconciliation": {
+      "raw_rows": 318040,
+      "raw_sum_price": 8842.202915254818,
+      "day_rows": 318040,
+      "day_sum_price": 8842.202915254722,
+      "n_customer_days": 90334,
+      "n_customers_with_purchases": 13831,
+      "rows_match": true,
+      "sum_match_rel_1e-9": true
+    },
+    "customer_key_one_to_one": true,
+    "snapshot_label_one_to_one": true,
+    "n_immature_labels": 0,
+    "n_history_bound_violations": 0,
+    "failed": []
+  },
+  "customer_keys": {
+    "n_keys": 13935,
+    "n_in_customers_csv": 13935,
+    "n_in_transactions": 13831
+  },
+  "purchase_days_per_customer": {
+    "n_customers_with_purchases": 13831,
+    "n_customers_with_2plus_purchase_days": 9249,
+    "share_2plus": 0.668715204974333,
+    "quantiles": {
+      "0.25": 1.0,
+      "0.5": 3.0,
+      "0.75": 8.0,
+      "0.9": 17.0,
+      "0.99": 45.0
+    },
+    "histogram_capped_50": {
+      "1": 4582,
+      "2": 1848,
+      "3": 1188,
+      "4": 859,
+      "5": 683,
+      "6": 549,
+      "7": 462,
+      "8": 421,
+      "9": 339,
+      "10": 278,
+      "11": 252,
+      "12": 275,
+      "13": 198,
+      "14": 153,
+      "15": 182,
+      "16": 150,
+      "17": 123,
+      "18": 133,
+      "19": 103,
+      "20": 104,
+      "21": 82,
+      "22": 79,
+      "23": 73,
+      "24": 64,
+      "25": 54,
+      "26": 60,
+      "27": 42,
+      "28": 37,
+      "29": 39,
+      "30": 25,
+      "31": 24,
+      "32": 34,
+      "33": 22,
+      "34": 14,
+      "35": 23,
+      "36": 23,
+      "37": 14,
+      "38": 19,
+      "39": 13,
+      "40": 13,
+      "41": 15,
+      "42": 12,
+      "43": 14,
+      "44": 9,
+      "45": 13,
+      "46": 12,
+      "47": 10,
+      "48": 7,
+      "49": 2,
+      "50+": 101
+    }
+  },
+  "table_sizes_bytes": {
+    "customer_day__smoke_dfa33f484c": 11034624,
+    "customer_key__smoke_dfa33f484c": 3489792,
+    "label__smoke_dfa33f484c": 9879552,
+    "snapshot__smoke_dfa33f484c": 24657920
+  },
+  "timings_seconds": {
+    "customer_key": 21.62,
+    "customer_day": 3.9,
+    "coverage_calendar": 0.4,
+    "snapshots_labels": 0.61,
+    "export_parquet": 1.04
+  },
+  "exports": {
+    "dir": "data/derived/smoke_dfa33f484c",
+    "n_feature_files": 21
+  }
+}

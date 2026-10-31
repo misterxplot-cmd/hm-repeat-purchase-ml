@@ -1,0 +1,663 @@
+{
+  "generated_at": "2026-10-31T14:50:28Z",
+  "loads": [
+    {
+      "load_id": 1,
+      "file_role": "transactions",
+      "sha256": "fff5e3b35c1b26016aa0bf2231be9525bc766eed32c94f1653420b465aef84fa",
+      "schema_version": "hmrp_ingest_v1",
+      "status": "completed",
+      "rows_read": 31788324,
+      "rows_loaded": 31788324,
+      "rows_rejected_structure": 0,
+      "rows_rejected_type": 0,
+      "started_at": "2026-10-31T14:42:46.991345+00:00",
+      "finished_at": "2026-10-31T14:50:23.453787+00:00",
+      "error": null,
+      "file_name": "transactions_train.csv",
+      "size_bytes": 3488002253
+    },
+    {
+      "load_id": 2,
+      "file_role": "customers",
+      "sha256": "abf3450c37ee1c16124e0d3379371153f5371148742efdcfe44c97c0445df6b2",
+      "schema_version": "hmrp_ingest_v1",
+      "status": "completed",
+      "rows_read": 1371980,
+      "rows_loaded": 1371980,
+      "rows_rejected_structure": 0,
+      "rows_rejected_type": 0,
+      "started_at": "2026-10-31T14:50:23.603379+00:00",
+      "finished_at": "2026-10-31T14:50:26.634521+00:00",
+      "error": null,
+      "file_name": "customers.csv",
+      "size_bytes": 207135859
+    },
+    {
+      "load_id": 3,
+      "file_role": "articles",
+      "sha256": "25f21882053517f7684ea43f524225a9481a7bb9aab9cf0abfc7fe8c4576a72b",
+      "schema_version": "hmrp_ingest_v1",
+      "status": "completed",
+      "rows_read": 105542,
+      "rows_loaded": 105542,
+      "rows_rejected_structure": 0,
+      "rows_rejected_type": 0,
+      "started_at": "2026-10-31T14:50:26.667864+00:00",
+      "finished_at": "2026-10-31T14:50:27.514148+00:00",
+      "error": null,
+      "file_name": "articles.csv",
+      "size_bytes": 36127865
+    }
+  ],
+  "transactions": {
+    "n_rows": 31788324,
+    "n_customers": 1362281,
+    "n_articles": 104547,
+    "min_date": "2018-09-20",
+    "max_date": "2020-09-22",
+    "n_distinct_dates": 734,
+    "sum_price": 884645.9739612684
+  },
+  "price": {
+    "min": 1.694915254237288e-05,
+    "max": 0.5915254237288136,
+    "mean": 0.02782927385390111,
+    "std": 0.01918112805475103,
+    "quantiles": [
+      0.001677966101694915,
+      0.003576271186440678,
+      0.007610169491525424,
+      0.015813559322033897,
+      0.025406779661016947,
+      0.033881355932203386,
+      0.05930508474576271,
+      0.10022033898305084,
+      0.16779661016949152
+    ],
+    "n_zero": 0,
+    "n_negative": 0,
+    "n_non_finite": 0,
+    "quantile_levels": [
+      0.001,
+      0.01,
+      0.05,
+      0.25,
+      0.5,
+      0.75,
+      0.95,
+      0.99,
+      0.999
+    ]
+  },
+  "channels": [
+    {
+      "sales_channel_id": 1,
+      "n_rows": 9408462,
+      "sum_price": 215682.82791595283
+    },
+    {
+      "sales_channel_id": 2,
+      "n_rows": 22379862,
+      "sum_price": 668963.1461472409
+    }
+  ],
+  "identical_rows": [
+    {
+      "multiplicity": 1,
+      "n_groups": 26269511,
+      "n_rows": 26269511.0
+    },
+    {
+      "multiplicity": 2,
+      "n_groups": 2285073,
+      "n_rows": 4570146.0
+    },
+    {
+      "multiplicity": 3,
+      "n_groups": 177237,
+      "n_rows": 531711.0
+    },
+    {
+      "multiplicity": 4,
+      "n_groups": 55412,
+      "n_rows": 221648.0
+    },
+    {
+      "multiplicity": 5,
+      "n_groups": 9259,
+      "n_rows": 46295.0
+    },
+    {
+      "multiplicity": 6,
+      "n_groups": 8181,
+      "n_rows": 49086.0
+    },
+    {
+      "multiplicity": 7,
+      "n_groups": 1733,
+      "n_rows": 12131.0
+    },
+    {
+      "multiplicity": 8,
+      "n_groups": 2132,
+      "n_rows": 17056.0
+    },
+    {
+      "multiplicity": 9,
+      "n_groups": 911,
+      "n_rows": 8199.0
+    },
+    {
+      "multiplicity": 10,
+      "n_groups": 1112,
+      "n_rows": 11120.0
+    },
+    {
+      "multiplicity": 11,
+      "n_groups": 380,
+      "n_rows": 4180.0
+    },
+    {
+      "multiplicity": 12,
+      "n_groups": 554,
+      "n_rows": 6648.0
+    },
+    {
+      "multiplicity": 13,
+      "n_groups": 230,
+      "n_rows": 2990.0
+    },
+    {
+      "multiplicity": 14,
+      "n_groups": 238,
+      "n_rows": 3332.0
+    },
+    {
+      "multiplicity": 15,
+      "n_groups": 190,
+      "n_rows": 2850.0
+    },
+    {
+      "multiplicity": 16,
+      "n_groups": 206,
+      "n_rows": 3296.0
+    },
+    {
+      "multiplicity": 17,
+      "n_groups": 84,
+      "n_rows": 1428.0
+    },
+    {
+      "multiplicity": 18,
+      "n_groups": 131,
+      "n_rows": 2358.0
+    },
+    {
+      "multiplicity": 19,
+      "n_groups": 78,
+      "n_rows": 1482.0
+    },
+    {
+      "multiplicity": 20,
+      "n_groups": 182,
+      "n_rows": 3640.0
+    },
+    {
+      "multiplicity": 21,
+      "n_groups": 48,
+      "n_rows": 1008.0
+    },
+    {
+      "multiplicity": 22,
+      "n_groups": 59,
+      "n_rows": 1298.0
+    },
+    {
+      "multiplicity": 23,
+      "n_groups": 36,
+      "n_rows": 828.0
+    },
+    {
+      "multiplicity": 24,
+      "n_groups": 61,
+      "n_rows": 1464.0
+    },
+    {
+      "multiplicity": 25,
+      "n_groups": 38,
+      "n_rows": 950.0
+    },
+    {
+      "multiplicity": 26,
+      "n_groups": 36,
+      "n_rows": 936.0
+    },
+    {
+      "multiplicity": 27,
+      "n_groups": 17,
+      "n_rows": 459.0
+    },
+    {
+      "multiplicity": 28,
+      "n_groups": 27,
+      "n_rows": 756.0
+    },
+    {
+      "multiplicity": 29,
+      "n_groups": 19,
+      "n_rows": 551.0
+    },
+    {
+      "multiplicity": 30,
+      "n_groups": 41,
+      "n_rows": 1230.0
+    },
+    {
+      "multiplicity": 31,
+      "n_groups": 15,
+      "n_rows": 465.0
+    },
+    {
+      "multiplicity": 32,
+      "n_groups": 10,
+      "n_rows": 320.0
+    },
+    {
+      "multiplicity": 33,
+      "n_groups": 11,
+      "n_rows": 363.0
+    },
+    {
+      "multiplicity": 34,
+      "n_groups": 16,
+      "n_rows": 544.0
+    },
+    {
+      "multiplicity": 35,
+      "n_groups": 14,
+      "n_rows": 490.0
+    },
+    {
+      "multiplicity": 36,
+      "n_groups": 16,
+      "n_rows": 576.0
+    },
+    {
+      "multiplicity": 37,
+      "n_groups": 2,
+      "n_rows": 74.0
+    },
+    {
+      "multiplicity": 38,
+      "n_groups": 12,
+      "n_rows": 456.0
+    },
+    {
+      "multiplicity": 39,
+      "n_groups": 5,
+      "n_rows": 195.0
+    },
+    {
+      "multiplicity": 40,
+      "n_groups": 15,
+      "n_rows": 600.0
+    },
+    {
+      "multiplicity": 41,
+      "n_groups": 4,
+      "n_rows": 164.0
+    },
+    {
+      "multiplicity": 42,
+      "n_groups": 2,
+      "n_rows": 84.0
+    },
+    {
+      "multiplicity": 43,
+      "n_groups": 5,
+      "n_rows": 215.0
+    },
+    {
+      "multiplicity": 44,
+      "n_groups": 8,
+      "n_rows": 352.0
+    },
+    {
+      "multiplicity": 45,
+      "n_groups": 9,
+      "n_rows": 405.0
+    },
+    {
+      "multiplicity": 46,
+      "n_groups": 6,
+      "n_rows": 276.0
+    },
+    {
+      "multiplicity": 47,
+      "n_groups": 2,
+      "n_rows": 94.0
+    },
+    {
+      "multiplicity": 48,
+      "n_groups": 6,
+      "n_rows": 288.0
+    },
+    {
+      "multiplicity": 49,
+      "n_groups": 2,
+      "n_rows": 98.0
+    },
+    {
+      "multiplicity": 50,
+      "n_groups": 7,
+      "n_rows": 350.0
+    },
+    {
+      "multiplicity": 52,
+      "n_groups": 3,
+      "n_rows": 156.0
+    },
+    {
+      "multiplicity": 53,
+      "n_groups": 1,
+      "n_rows": 53.0
+    },
+    {
+      "multiplicity": 54,
+      "n_groups": 3,
+      "n_rows": 162.0
+    },
+    {
+      "multiplicity": 55,
+      "n_groups": 1,
+      "n_rows": 55.0
+    },
+    {
+      "multiplicity": 56,
+      "n_groups": 2,
+      "n_rows": 112.0
+    },
+    {
+      "multiplicity": 58,
+      "n_groups": 2,
+      "n_rows": 116.0
+    },
+    {
+      "multiplicity": 62,
+      "n_groups": 1,
+      "n_rows": 62.0
+    },
+    {
+      "multiplicity": 63,
+      "n_groups": 1,
+      "n_rows": 63.0
+    },
+    {
+      "multiplicity": 64,
+      "n_groups": 1,
+      "n_rows": 64.0
+    },
+    {
+      "multiplicity": 66,
+      "n_groups": 1,
+      "n_rows": 66.0
+    },
+    {
+      "multiplicity": 70,
+      "n_groups": 1,
+      "n_rows": 70.0
+    },
+    {
+      "multiplicity": 76,
+      "n_groups": 2,
+      "n_rows": 152.0
+    },
+    {
+      "multiplicity": 77,
+      "n_groups": 1,
+      "n_rows": 77.0
+    },
+    {
+      "multiplicity": 79,
+      "n_groups": 2,
+      "n_rows": 158.0
+    },
+    {
+      "multiplicity": 80,
+      "n_groups": 2,
+      "n_rows": 160.0
+    },
+    {
+      "multiplicity": 83,
+      "n_groups": 1,
+      "n_rows": 83.0
+    },
+    {
+      "multiplicity": 86,
+      "n_groups": 1,
+      "n_rows": 86.0
+    },
+    {
+      "multiplicity": 89,
+      "n_groups": 1,
+      "n_rows": 89.0
+    },
+    {
+      "multiplicity": 100,
+      "n_groups": 2,
+      "n_rows": 200.0
+    },
+    {
+      "multiplicity": 105,
+      "n_groups": 1,
+      "n_rows": 105.0
+    },
+    {
+      "multiplicity": 114,
+      "n_groups": 1,
+      "n_rows": 114.0
+    },
+    {
+      "multiplicity": 117,
+      "n_groups": 1,
+      "n_rows": 117.0
+    },
+    {
+      "multiplicity": 120,
+      "n_groups": 2,
+      "n_rows": 240.0
+    },
+    {
+      "multiplicity": 199,
+      "n_groups": 1,
+      "n_rows": 199.0
+    },
+    {
+      "multiplicity": 569,
+      "n_groups": 1,
+      "n_rows": 569.0
+    }
+  ],
+  "identical_rows_summary": {
+    "rows_in_groups_with_multiplicity_gt_1": 5518813,
+    "rows_beyond_first_in_group": 2974905,
+    "policy": "kept: no order_id/quantity in source, identical rows may be several units"
+  },
+  "coverage": {
+    "customers": {
+      "n_tx_customers": 1362281,
+      "n_not_in_customers_csv": 0
+    },
+    "articles": {
+      "n_tx_articles": 104547,
+      "n_not_in_articles_csv": 0
+    }
+  },
+  "customers_csv": {
+    "n_rows": 1371980,
+    "n_distinct_customer_id": 1371980,
+    "n_null_customer_id": 0,
+    "n_bad_format_customer_id": 0,
+    "n_null_fn": 895050,
+    "n_null_active": 907576,
+    "n_null_club_member_status": 6062,
+    "n_null_fashion_news_frequency": 16009,
+    "n_null_age": 15861,
+    "n_non_integer_age": 0,
+    "n_null_postal_code": 0
+  },
+  "customers_categoricals": [
+    {
+      "field": "active",
+      "value": "<empty>",
+      "n": 907576
+    },
+    {
+      "field": "active",
+      "value": "1.0",
+      "n": 464404
+    },
+    {
+      "field": "club_member_status",
+      "value": "ACTIVE",
+      "n": 1272491
+    },
+    {
+      "field": "club_member_status",
+      "value": "PRE-CREATE",
+      "n": 92960
+    },
+    {
+      "field": "club_member_status",
+      "value": "<empty>",
+      "n": 6062
+    },
+    {
+      "field": "club_member_status",
+      "value": "LEFT CLUB",
+      "n": 467
+    },
+    {
+      "field": "fashion_news_frequency",
+      "value": "NONE",
+      "n": 877711
+    },
+    {
+      "field": "fashion_news_frequency",
+      "value": "Regularly",
+      "n": 477416
+    },
+    {
+      "field": "fashion_news_frequency",
+      "value": "<empty>",
+      "n": 16009
+    },
+    {
+      "field": "fashion_news_frequency",
+      "value": "Monthly",
+      "n": 842
+    },
+    {
+      "field": "fashion_news_frequency",
+      "value": "None",
+      "n": 2
+    },
+    {
+      "field": "fn",
+      "value": "<empty>",
+      "n": 895050
+    },
+    {
+      "field": "fn",
+      "value": "1.0",
+      "n": 476930
+    }
+  ],
+  "articles_csv": {
+    "n_rows": 105542,
+    "n_distinct_article_id": 105542,
+    "n_null_article_id": 0,
+    "n_bad_format_article_id": 0,
+    "n_null_detail_desc": 416,
+    "n_product_groups": 19
+  },
+  "rejected_by_reason": [],
+  "join_checks": {
+    "transactions_to_articles": {
+      "fact": "raw.transactions__load_1",
+      "dim": "raw.articles__load_3",
+      "key": "article_id",
+      "measure": "price",
+      "dim_key": {
+        "n_rows": 105542,
+        "n_distinct": 105542,
+        "n_null": 0
+      },
+      "fact_rows": 31788324,
+      "fact_sum": 884645.9740440027,
+      "joined_rows": 31788324,
+      "joined_sum": 884645.9740430408,
+      "n_unmatched": 0,
+      "rows_preserved": true,
+      "sum_preserved": true,
+      "status": "passed",
+      "seconds": 1.38
+    },
+    "transactions_to_customers": {
+      "fact": "raw.transactions__load_1",
+      "dim": "raw.customers__load_2",
+      "key": "customer_id",
+      "measure": "price",
+      "dim_key": {
+        "n_rows": 1371980,
+        "n_distinct": 1371980,
+        "n_null": 0
+      },
+      "fact_rows": 31788324,
+      "fact_sum": 884645.9740439947,
+      "joined_rows": 31788324,
+      "joined_sum": 884645.9740430678,
+      "n_unmatched": 0,
+      "rows_preserved": true,
+      "sum_preserved": true,
+      "status": "passed",
+      "seconds": 2.11
+    }
+  },
+  "calendar": {
+    "n_dates_with_rows": 734,
+    "n_calendar_days": 734,
+    "missing_dates": []
+  },
+  "daily_rows_distribution": {
+    "count": 734.0,
+    "mean": 43308.34332425068,
+    "std": 17075.025144426178,
+    "min": 12760.0,
+    "25%": 33935.75,
+    "50%": 39515.5,
+    "75%": 47447.5,
+    "max": 198622.0
+  },
+  "query_seconds": {
+    "tx_overview": 42.56,
+    "tx_price_stats": 3.92,
+    "tx_channels": 0.52,
+    "tx_monthly_channel": 15.48,
+    "tx_daily_by_channel": 9.04,
+    "tx_price_log_histogram": 0.56,
+    "tx_identical_rows": 13.86,
+    "tx_customer_coverage": 3.87,
+    "tx_article_coverage": 0.83,
+    "customers_overview": 5.79,
+    "customers_categoricals": 0.16,
+    "articles_overview": 0.08,
+    "rejected_by_reason": 0.0
+  },
+  "figures": [
+    "reports/data/figures/daily_rows_by_channel.png",
+    "reports/data/figures/monthly_channel_share.png",
+    "reports/data/figures/price_log10_histogram.png"
+  ]
+}

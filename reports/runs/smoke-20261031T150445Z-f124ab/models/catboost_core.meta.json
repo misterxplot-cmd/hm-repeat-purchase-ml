@@ -1,0 +1,71 @@
+{
+  "model_version": "smoke-20261031T150445Z-f124ab/catboost_core",
+  "model": "catboost_core",
+  "family": "catboost",
+  "feature_set_version": "core_v1",
+  "features": [
+    "purchase_days_90d",
+    "avg_scaled_spend_per_purchase_day_90d",
+    "recency_days"
+  ],
+  "config": "d6_lr0.10_l2_3",
+  "params": {
+    "depth": 6,
+    "learning_rate": 0.1,
+    "l2_leaf_reg": 3,
+    "name": "d6_lr0.10_l2_3",
+    "iterations": 28
+  },
+  "param_derivation": {
+    "iterations": 28,
+    "rule": "median(best_iteration + 1) over development folds",
+    "best_iteration_per_fold": [
+      170,
+      14,
+      27
+    ]
+  },
+  "raw_score_definition": "CatBoostClassifier.predict(prediction_type='RawFormulaVal') (log-odds)",
+  "dataset_id": "smoke_dfa33f484c",
+  "train_cutoffs": [
+    "2019-01-02",
+    "2019-02-01",
+    "2019-03-03",
+    "2019-04-02",
+    "2019-05-02",
+    "2019-06-01",
+    "2019-07-01",
+    "2019-07-31",
+    "2019-08-30",
+    "2019-09-29",
+    "2019-10-29",
+    "2019-11-28",
+    "2019-12-28",
+    "2020-01-27",
+    "2020-02-26",
+    "2020-03-27",
+    "2020-04-26",
+    "2020-05-26",
+    "2020-06-25"
+  ],
+  "max_train_label_end_exclusive": "2020-07-25",
+  "n_train": 97336,
+  "train_prevalence": 0.32738144160433963,
+  "fit_info": {
+    "fit_seconds": 0.10386290000042209,
+    "n_train": 97336,
+    "best_iteration": null,
+    "tree_count": 28,
+    "iterations_requested": 28,
+    "early_stopping": false,
+    "feature_importance": {
+      "purchase_days_90d": 90.44528050304397,
+      "avg_scaled_spend_per_purchase_day_90d": 2.258868847162566,
+      "recency_days": 7.295850649793472
+    }
+  },
+  "artifact": "artifacts/runs/smoke-20261031T150445Z-f124ab/models/catboost_core.cbm",
+  "artifact_bytes": 36096,
+  "artifact_sha256": "0d38dc8cbef2dd5308465c9bed4cfc7cb0802703f106f0a1de165a9b28646753",
+  "frozen_at": "2026-10-31T15:05:00Z"
+}

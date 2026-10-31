@@ -1,0 +1,30 @@
+Insert on customer_day__full_6114b4ad79  (cost=5801045.75..7310991.14 rows=0 width=0) (actual time=27445.831..27445.834 rows=0 loops=1)
+  Buffers: shared hit=9278652 read=538913 dirtied=84883 written=84885, temp read=155528 written=155537
+  ->  Subquery Scan on "*SELECT*"  (cost=5801045.75..7310991.14 rows=31788324 width=60) (actual time=17223.673..23303.332 rows=9080179 loops=1)
+        Buffers: shared hit=28765 read=538913, temp read=155528 written=155537
+        ->  GroupAggregate  (cost=5801045.75..6993107.90 rows=31788324 width=60) (actual time=17223.671..22854.780 rows=9080179 loops=1)
+              Group Key: k.customer_sk, t.t_dat
+              Buffers: shared hit=28765 read=538913, temp read=155528 written=155537
+              ->  Sort  (cost=5801045.75..5880516.56 rows=31788324 width=29) (actual time=17223.633..19291.928 rows=31788324 loops=1)
+                    Sort Key: k.customer_sk, t.t_dat, t.article_id
+                    Sort Method: external merge  Disk: 1244224kB
+                    Buffers: shared hit=28765 read=538913, temp read=155528 written=155537
+                    ->  Hash Join  (cost=50469.55..1079343.21 rows=31788324 width=29) (actual time=411.313..8312.927 rows=31788324 loops=1)
+                          Hash Cond: (t.customer_id = k.customer_id)
+                          Buffers: shared hit=28762 read=538913
+                          ->  Seq Scan on transactions__load_1 t  (cost=0.00..945429.05 rows=31788324 width=90) (actual time=61.620..2057.215 rows=31788324 loops=1)
+                                Filter: (load_id = 1)
+                                Buffers: shared hit=9162 read=538913
+                          ->  Hash  (cost=33319.80..33319.80 rows=1371980 width=36) (actual time=344.443..344.443 rows=1371980 loops=1)
+                                Buckets: 2097152  Batches: 1  Memory Usage: 151707kB
+                                Buffers: shared hit=19600
+                                ->  Seq Scan on customer_key__full_6114b4ad79 k  (cost=0.00..33319.80 rows=1371980 width=36) (actual time=0.035..77.000 rows=1371980 loops=1)
+                                      Buffers: shared hit=19600
+Planning:
+  Buffers: shared hit=69 read=2
+Planning Time: 0.231 ms
+JIT:
+  Functions: 18
+  Options: Inlining true, Optimization true, Expressions true, Deforming true
+  Timing: Generation 0.474 ms, Inlining 7.158 ms, Optimization 31.969 ms, Emission 22.533 ms, Total 62.134 ms
+Execution Time: 27503.043 ms

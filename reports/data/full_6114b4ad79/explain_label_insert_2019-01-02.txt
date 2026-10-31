@@ -1,0 +1,30 @@
+Insert on label__full_6114b4ad79  (cost=102229.31..124445.88 rows=0 width=0) (actual time=553.623..553.625 rows=0 loops=1)
+  Buffers: shared hit=632895 read=951 dirtied=4407 written=4411
+  ->  Hash Left Join  (cost=102229.31..124445.88 rows=528769 width=50) (actual time=180.697..336.197 rows=528769 loops=1)
+        Hash Cond: (s.customer_sk = customer_day__full_6114b4ad79.customer_sk)
+        Buffers: shared hit=95304 read=951
+        ->  Seq Scan on snapshot__full_6114b4ad79 s  (cost=0.00..19506.61 rows=528769 width=8) (actual time=3.612..36.453 rows=528769 loops=1)
+              Filter: (cutoff_date = '2019-01-02'::date)
+              Buffers: shared hit=12897
+        ->  Hash  (cost=100224.10..100224.10 rows=160417 width=4) (actual time=176.963..176.964 rows=240098 loops=1)
+              Buckets: 262144  Batches: 1  Memory Usage: 10489kB
+              Buffers: shared hit=82407 read=951
+              ->  HashAggregate  (cost=98619.93..100224.10 rows=160417 width=4) (actual time=138.807..160.224 rows=240098 loops=1)
+                    Group Key: customer_day__full_6114b4ad79.customer_sk
+                    Batches: 1  Memory Usage: 28689kB
+                    Buffers: shared hit=82407 read=951
+                    ->  Bitmap Heap Scan on customer_day__full_6114b4ad79  (cost=7541.49..97731.87 rows=355225 width=4) (actual time=23.118..88.985 rows=347753 loops=1)
+                          Recheck Cond: ((t_dat >= '2019-01-02'::date) AND (t_dat < '2019-02-01'::date))
+                          Heap Blocks: exact=82405
+                          Buffers: shared hit=82407 read=951
+                          ->  Bitmap Index Scan on customer_day__full_6114b4ad79_t_dat_customer_sk_idx  (cost=0.00..7452.69 rows=355225 width=0) (actual time=15.181..15.181 rows=347753 loops=1)
+                                Index Cond: ((t_dat >= '2019-01-02'::date) AND (t_dat < '2019-02-01'::date))
+                                Buffers: shared hit=2 read=951
+Planning:
+  Buffers: shared hit=11
+Planning Time: 0.118 ms
+JIT:
+  Functions: 18
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.451 ms, Inlining 0.000 ms, Optimization 0.199 ms, Emission 3.468 ms, Total 4.118 ms
+Execution Time: 554.478 ms

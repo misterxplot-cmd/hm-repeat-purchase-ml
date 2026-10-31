@@ -1,0 +1,23 @@
+Insert on snapshot__full_6114b4ad79  (cost=181528.82..194643.11 rows=0 width=0) (actual time=1040.481..1040.482 rows=0 loops=1)
+  Buffers: shared hit=639267 read=3146 dirtied=12901 written=12903
+  ->  Subquery Scan on f  (cost=181528.82..194643.11 rows=187347 width=208) (actual time=451.547..655.799 rows=528769 loops=1)
+        Buffers: shared hit=84703 read=3146
+        ->  HashAggregate  (cost=181528.82..194643.11 rows=187347 width=100) (actual time=451.544..623.408 rows=528769 loops=1)
+              Group Key: cd.customer_sk
+              Batches: 1  Memory Usage: 188433kB
+              Buffers: shared hit=84703 read=3146
+              ->  Bitmap Heap Scan on customer_day__full_6114b4ad79 cd  (cost=24503.26..126684.51 rows=1154617 width=24) (actual time=54.897..188.604 rows=1150451 loops=1)
+                    Recheck Cond: ((t_dat >= '2018-10-04'::date) AND (t_dat < '2019-01-02'::date))
+                    Heap Blocks: exact=84703
+                    Buffers: shared hit=84703 read=3146
+                    ->  Bitmap Index Scan on customer_day__full_6114b4ad79_t_dat_customer_sk_idx  (cost=0.00..24214.60 rows=1154617 width=0) (actual time=46.050..46.050 rows=1150451 loops=1)
+                          Index Cond: ((t_dat >= '2018-10-04'::date) AND (t_dat < '2019-01-02'::date))
+                          Buffers: shared read=3146
+Planning:
+  Buffers: shared hit=62 read=2
+Planning Time: 0.214 ms
+JIT:
+  Functions: 9
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.576 ms, Inlining 0.000 ms, Optimization 0.391 ms, Emission 4.662 ms, Total 5.629 ms
+Execution Time: 1044.590 ms

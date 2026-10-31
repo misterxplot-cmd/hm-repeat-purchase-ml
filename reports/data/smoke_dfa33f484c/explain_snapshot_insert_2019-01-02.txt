@@ -1,0 +1,19 @@
+Insert on snapshot__smoke_dfa33f484c  (cost=1834.94..2339.15 rows=0 width=0) (actual time=8.677..8.678 rows=0 loops=1)
+  Buffers: shared hit=6511 read=34 dirtied=135 written=138
+  ->  Subquery Scan on f  (cost=1834.94..2339.15 rows=7203 width=208) (actual time=3.365..5.088 rows=5393 loops=1)
+        Buffers: shared hit=844 read=34
+        ->  HashAggregate  (cost=1834.94..2339.15 rows=7203 width=100) (actual time=3.363..4.712 rows=5393 loops=1)
+              Group Key: cd.customer_sk
+              Batches: 1  Memory Usage: 2257kB
+              Buffers: shared hit=844 read=34
+              ->  Bitmap Heap Scan on customer_day__smoke_dfa33f484c cd  (cost=253.13..1274.96 rows=11789 width=24) (actual time=0.443..1.623 rows=11607 loops=1)
+                    Recheck Cond: ((t_dat >= '2018-10-04'::date) AND (t_dat < '2019-01-02'::date))
+                    Heap Blocks: exact=844
+                    Buffers: shared hit=844 read=34
+                    ->  Bitmap Index Scan on customer_day__smoke_dfa33f484c_t_dat_customer_sk_idx  (cost=0.00..250.18 rows=11789 width=0) (actual time=0.390..0.391 rows=11607 loops=1)
+                          Index Cond: ((t_dat >= '2018-10-04'::date) AND (t_dat < '2019-01-02'::date))
+                          Buffers: shared read=34
+Planning:
+  Buffers: shared hit=60 read=3
+Planning Time: 0.202 ms
+Execution Time: 8.718 ms

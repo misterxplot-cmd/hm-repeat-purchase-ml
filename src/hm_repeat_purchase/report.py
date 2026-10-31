@@ -430,10 +430,10 @@ def performance_md(config: Config, run: dict, out: Path) -> str:
 # --------------------------------------------------------------------------- README blocks
 
 def _replace_block(text: str, name: str, body: str) -> str:
-    pattern = re.compile(rf"(<!-- AUTO:{name}:start -->\n).*?(\n<!-- AUTO:{name}:end -->)", re.DOTALL)
+    pattern = re.compile(rf"(<!-- AUTO:{name}:start -->\n)(?:.*?\n)?(<!-- AUTO:{name}:end -->)", re.DOTALL)
     if not pattern.search(text):
         return text
-    return pattern.sub(lambda m: m.group(1) + body + m.group(2), text)
+    return pattern.sub(lambda m: m.group(1) + body.rstrip("\n") + "\n" + m.group(2), text)
 
 
 def update_readme(config: Config) -> list[str]:
@@ -448,7 +448,13 @@ def update_readme(config: Config) -> list[str]:
     for mode in ("full", "smoke"):
         rid = index.get(mode)
         if not rid:
-            status_rows.append([mode, "not_run", "—", "—"])
+            partial = sorted(p.name for p in (config.reports_dir / "runs").glob(f"{mode}-*")
+                             if (p / "run_manifest.json").exists())
+            if partial:
+                status_rows.append([mode, "не завершён (нет final test в опубликованных артефактах)",
+                                    f"`{partial[-1]}`", "ingest, audit, features"])
+            else:
+                status_rows.append([mode, "not_run", "—", "—"])
             continue
         r = load_run(config, rid)
         stages = [s for s, ok in (("train", r["selection_decision"]), ("calibrate", r["calibration"]),

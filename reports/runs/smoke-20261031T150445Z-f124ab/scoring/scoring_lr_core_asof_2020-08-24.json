@@ -1,0 +1,58 @@
+{
+  "run_id": "smoke-20261031T150445Z-f124ab",
+  "model": "lr_core",
+  "model_version": "smoke-20261031T150445Z-f124ab/lr_core",
+  "feature_set_version": "core_v1",
+  "as_of_date": "2020-08-24",
+  "horizon_days": 30,
+  "scored_at": "2026-10-31T15:05:01Z",
+  "n_scored": 5486,
+  "primary_budget": 0.05,
+  "k": 275,
+  "ranking_source": "raw_score",
+  "primary_probability_field": "calibrated_probability",
+  "calibration_fallback_used": false,
+  "target_included": false,
+  "label_window_observed": true,
+  "validity_checks": {
+    "max_train_label_end_exclusive": "2020-07-25",
+    "calibration_target_end_exclusive": "2020-08-24",
+    "selection_label_end_exclusive": "2020-07-25",
+    "history_start": "2020-05-26",
+    "data_min_date": "2018-09-20",
+    "observation_end_exclusive": "2020-09-23",
+    "errors": [],
+    "valid": true
+  },
+  "feature_consistency_with_training_snapshot": {
+    "compared_with_snapshot": true,
+    "same_customers": true,
+    "max_abs_diff": 0.0
+  },
+  "output_file": "artifacts/runs/smoke-20261031T150445Z-f124ab/scoring/scores_lr_core_asof_2020-08-24.csv",
+  "output_rows": 5486,
+  "output_sha256": "a5309d325b69d677d7fb1a16a67abb5500171a13818b1409cb9b5ae81279eece",
+  "columns": [
+    "customer_id",
+    "as_of_date",
+    "horizon_days",
+    "raw_score",
+    "raw_probability",
+    "calibrated_probability",
+    "rank",
+    "selected_for_top_segment",
+    "model_version",
+    "feature_set_version",
+    "run_id"
+  ],
+  "raw_score_quantiles": {
+    "0.01": -1.4760395798166823,
+    "0.25": -1.3795633225444686,
+    "0.5": -0.858607205582536,
+    "0.75": -0.3033629575560558,
+    "0.95": 0.6951696877188748,
+    "0.99": 1.4633354923718151
+  },
+  "calibrated_probability_mean": 0.30973320288626915,
+  "top_segment_calibrated_probability_mean": 0.7381912854681414
+}

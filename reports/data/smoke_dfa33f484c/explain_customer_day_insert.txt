@@ -1,0 +1,30 @@
+Insert on customer_day__smoke_dfa33f484c  (cost=5751129.85..6463538.83 rows=0 width=0) (actual time=3806.059..3806.062 rows=0 loops=1)
+  Buffers: shared hit=314832 read=325489 dirtied=846 written=848
+  ->  Subquery Scan on "*SELECT*"  (cost=5751129.85..6463538.83 rows=2787000 width=60) (actual time=3720.412..3770.214 rows=90334 loops=1)
+        Buffers: shared hit=222804 read=325489
+        ->  GroupAggregate  (cost=5751129.85..6435668.83 rows=2787000 width=60) (actual time=3720.410..3766.027 rows=90334 loops=1)
+              Group Key: k.customer_sk, t.t_dat
+              Buffers: shared hit=222804 read=325489
+              ->  Sort  (cost=5751129.85..5830600.66 rows=31788324 width=29) (actual time=3720.375..3731.477 rows=318040 loops=1)
+                    Sort Key: k.customer_sk, t.t_dat, t.article_id
+                    Sort Method: quicksort  Memory: 29681kB
+                    Buffers: shared hit=222804 read=325489
+                    ->  Hash Join  (cost=528.54..1029427.31 rows=31788324 width=29) (actual time=62.850..3617.664 rows=318040 loops=1)
+                          Hash Cond: (t.customer_id = k.customer_id)
+                          Buffers: shared hit=222801 read=325489
+                          ->  Seq Scan on transactions__load_1 t  (cost=0.00..945429.05 rows=31788324 width=90) (actual time=60.675..1722.110 rows=31788324 loops=1)
+                                Filter: (load_id = 1)
+                                Buffers: shared hit=222586 read=325489
+                          ->  Hash  (cost=354.35..354.35 rows=13935 width=36) (actual time=2.102..2.103 rows=13935 loops=1)
+                                Buckets: 16384  Batches: 1  Memory Usage: 1503kB
+                                Buffers: shared hit=215
+                                ->  Seq Scan on customer_key__smoke_dfa33f484c k  (cost=0.00..354.35 rows=13935 width=36) (actual time=0.015..0.809 rows=13935 loops=1)
+                                      Buffers: shared hit=215
+Planning:
+  Buffers: shared hit=75 read=3
+Planning Time: 0.220 ms
+JIT:
+  Functions: 18
+  Options: Inlining true, Optimization true, Expressions true, Deforming true
+  Timing: Generation 0.455 ms, Inlining 6.516 ms, Optimization 30.705 ms, Emission 23.477 ms, Total 61.152 ms
+Execution Time: 3807.116 ms

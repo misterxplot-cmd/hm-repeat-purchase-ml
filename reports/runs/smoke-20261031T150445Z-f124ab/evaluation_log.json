@@ -1,0 +1,8 @@
+[
+  {
+    "evaluated_at": "2026-10-31T15:05:01Z",
+    "reason": "initial evaluation",
+    "selection_decision_sha256": "c0146c6eccd690c6ed2c27375667243b436ab396ea516a23f3cd5c06bd4d0b2d",
+    "selection_frozen_at": "2026-10-31T15:05:00Z"
+  }
+]

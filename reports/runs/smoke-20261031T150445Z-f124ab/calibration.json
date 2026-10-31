@@ -1,0 +1,111 @@
+{
+  "run_id": "smoke-20261031T150445Z-f124ab",
+  "method": "platt_sigmoid_on_raw_score",
+  "calibration_window": {
+    "cutoff_date": "2020-07-25",
+    "history_start": "2020-04-26",
+    "history_end_exclusive": "2020-07-25",
+    "target_start": "2020-07-25",
+    "target_end_exclusive": "2020-08-24"
+  },
+  "calibration_target_end_exclusive": "2020-08-24",
+  "n": 5404,
+  "n_positive": 1675,
+  "prevalence": 0.30995558845299775,
+  "models": {
+    "lr_core": {
+      "model_version": "smoke-20261031T150445Z-f124ab/lr_core",
+      "params": {
+        "n": 5404,
+        "n_positive": 1675,
+        "n_negative": 3729,
+        "min_class_count": 50,
+        "status": "ok",
+        "a": 1.0186056231769305,
+        "b": -0.09234103950429771,
+        "n_iter": 6
+      },
+      "primary_probability": "calibrated_probability",
+      "fallback_used": false,
+      "calibration_slice_metrics": {
+        "average_precision": 0.5312378158653891,
+        "roc_auc": 0.687866620237509,
+        "raw_probability": {
+          "brier": 0.19010485238259747,
+          "mean_predicted": 0.3301742084275335,
+          "status": "ok",
+          "log_loss": 0.565130581709803
+        },
+        "calibrated_probability": {
+          "brier": 0.1896758965916203,
+          "mean_predicted": 0.3099232796445695,
+          "status": "ok",
+          "log_loss": 0.5640644907682502
+        }
+      }
+    },
+    "catboost_core": {
+      "model_version": "smoke-20261031T150445Z-f124ab/catboost_core",
+      "params": {
+        "n": 5404,
+        "n_positive": 1675,
+        "n_negative": 3729,
+        "min_class_count": 50,
+        "status": "ok",
+        "a": 1.1197128160564853,
+        "b": -0.0748914350687131,
+        "n_iter": 6
+      },
+      "primary_probability": "calibrated_probability",
+      "fallback_used": false,
+      "calibration_slice_metrics": {
+        "average_precision": 0.5323984082141322,
+        "roc_auc": 0.6891368579467905,
+        "raw_probability": {
+          "brier": 0.1906788349602351,
+          "mean_predicted": 0.33948357011470287,
+          "status": "ok",
+          "log_loss": 0.5668210455597779
+        },
+        "calibrated_probability": {
+          "brier": 0.1896962268201667,
+          "mean_predicted": 0.30990337771056403,
+          "status": "ok",
+          "log_loss": 0.564077557276474
+        }
+      }
+    },
+    "catboost_ext": {
+      "model_version": "smoke-20261031T150445Z-f124ab/catboost_ext",
+      "params": {
+        "n": 5404,
+        "n_positive": 1675,
+        "n_negative": 3729,
+        "min_class_count": 50,
+        "status": "ok",
+        "a": 1.0331394915947127,
+        "b": -0.07417673130672588,
+        "n_iter": 6
+      },
+      "primary_probability": "calibrated_probability",
+      "fallback_used": false,
+      "calibration_slice_metrics": {
+        "average_precision": 0.5375691479411367,
+        "roc_auc": 0.6982308089480193,
+        "raw_probability": {
+          "brier": 0.18885732385500043,
+          "mean_predicted": 0.3284614885384499,
+          "status": "ok",
+          "log_loss": 0.5617063515058159
+        },
+        "calibrated_probability": {
+          "brier": 0.1885257631123941,
+          "mean_predicted": 0.309916873806516,
+          "status": "ok",
+          "log_loss": 0.560769741453641
+        }
+      }
+    }
+  },
+  "fitted_at": "2026-10-31T15:05:01Z"
+}

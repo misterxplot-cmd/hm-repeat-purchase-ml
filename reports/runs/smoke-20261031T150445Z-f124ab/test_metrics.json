@@ -1,0 +1,265 @@
+{
+  "run_id": "smoke-20261031T150445Z-f124ab",
+  "dataset_id": "smoke_dfa33f484c",
+  "test_window": {
+    "cutoff_date": "2020-08-24",
+    "history_start": "2020-05-26",
+    "history_end_exclusive": "2020-08-24",
+    "target_start": "2020-08-24",
+    "target_end_exclusive": "2020-09-23"
+  },
+  "selection_decision": "reports/runs/smoke-20261031T150445Z-f124ab/selection_decision.json",
+  "selected_model": "lr_core",
+  "evaluation": {
+    "evaluated_at": "2026-10-31T15:05:01Z",
+    "reason": "initial evaluation",
+    "selection_decision_sha256": "c0146c6eccd690c6ed2c27375667243b436ab396ea516a23f3cd5c06bd4d0b2d",
+    "selection_frozen_at": "2026-10-31T15:05:00Z"
+  },
+  "n_evaluations": 1,
+  "n": 5486,
+  "n_customers": 5486,
+  "n_positive": 1673,
+  "prevalence": 0.3049580751002552,
+  "primary_budget": 0.05,
+  "models": {
+    "recency_baseline": {
+      "n": 5486,
+      "n_positive": 1673,
+      "prevalence": 0.3049580751002552,
+      "roc_auc": 0.6349602431296086,
+      "average_precision": 0.4067972430975723,
+      "ranking_status": "ok",
+      "at_budget": {
+        "top_1pct": {
+          "share": 0.01,
+          "k": 55,
+          "n": 5486,
+          "hits": 28,
+          "precision": 0.509090909090909,
+          "prevalence": 0.3049580751002552,
+          "lift": 1.6693799923925445,
+          "lift_status": "ok"
+        },
+        "top_5pct": {
+          "share": 0.05,
+          "k": 275,
+          "n": 5486,
+          "hits": 126,
+          "precision": 0.4581818181818182,
+          "prevalence": 0.3049580751002552,
+          "lift": 1.5024419931532902,
+          "lift_status": "ok"
+        },
+        "top_10pct": {
+          "share": 0.1,
+          "k": 549,
+          "n": 5486,
+          "hits": 252,
+          "precision": 0.45901639344262296,
+          "prevalence": 0.3049580751002552,
+          "lift": 1.5051786816654091,
+          "lift_status": "ok"
+        }
+      },
+      "raw_probability": {
+        "status": "not_applicable"
+      },
+      "calibrated_probability": {
+        "status": "not_applicable"
+      },
+      "model_version": "recency_baseline",
+      "feature_set_version": "core_v1",
+      "calibration_status": "not_applicable",
+      "selected": false
+    },
+    "lr_core": {
+      "n": 5486,
+      "n_positive": 1673,
+      "prevalence": 0.3049580751002552,
+      "roc_auc": 0.7038631641932176,
+      "average_precision": 0.5374342055451793,
+      "ranking_status": "ok",
+      "at_budget": {
+        "top_1pct": {
+          "share": 0.01,
+          "k": 55,
+          "n": 5486,
+          "hits": 48,
+          "precision": 0.8727272727272727,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.8617942726729337,
+          "lift_status": "ok"
+        },
+        "top_5pct": {
+          "share": 0.05,
+          "k": 275,
+          "n": 5486,
+          "hits": 205,
+          "precision": 0.7454545454545455,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.4444492745747977,
+          "lift_status": "ok"
+        },
+        "top_10pct": {
+          "share": 0.1,
+          "k": 549,
+          "n": 5486,
+          "hits": 364,
+          "precision": 0.663023679417122,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.1741469846278134,
+          "lift_status": "ok"
+        }
+      },
+      "raw_probability": {
+        "brier": 0.18632469890340908,
+        "mean_predicted": 0.32986934852731653,
+        "status": "ok",
+        "log_loss": 0.5564676578362945
+      },
+      "calibrated_probability": {
+        "brier": 0.185728131558071,
+        "mean_predicted": 0.30973320288626915,
+        "status": "ok",
+        "log_loss": 0.5548474840553392
+      },
+      "model_version": "smoke-20261031T150445Z-f124ab/lr_core",
+      "feature_set_version": "core_v1",
+      "calibration_status": "ok",
+      "selected": true
+    },
+    "catboost_core": {
+      "n": 5486,
+      "n_positive": 1673,
+      "prevalence": 0.3049580751002552,
+      "roc_auc": 0.7040728316582666,
+      "average_precision": 0.5358619729348773,
+      "ranking_status": "ok",
+      "at_budget": {
+        "top_1pct": {
+          "share": 0.01,
+          "k": 55,
+          "n": 5486,
+          "hits": 47,
+          "precision": 0.8545454545454545,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.802173558658914,
+          "lift_status": "ok"
+        },
+        "top_5pct": {
+          "share": 0.05,
+          "k": 275,
+          "n": 5486,
+          "hits": 205,
+          "precision": 0.7454545454545455,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.4444492745747977,
+          "lift_status": "ok"
+        },
+        "top_10pct": {
+          "share": 0.1,
+          "k": 549,
+          "n": 5486,
+          "hits": 366,
+          "precision": 0.6666666666666666,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.186092847180713,
+          "lift_status": "ok"
+        }
+      },
+      "raw_probability": {
+        "brier": 0.18709150227814825,
+        "mean_predicted": 0.338604665605369,
+        "status": "ok",
+        "log_loss": 0.5587757277069089
+      },
+      "calibrated_probability": {
+        "brier": 0.1857952571033304,
+        "mean_predicted": 0.3091072907256589,
+        "status": "ok",
+        "log_loss": 0.5550268678083067
+      },
+      "model_version": "smoke-20261031T150445Z-f124ab/catboost_core",
+      "feature_set_version": "core_v1",
+      "calibration_status": "ok",
+      "selected": false
+    },
+    "catboost_ext": {
+      "n": 5486,
+      "n_positive": 1673,
+      "prevalence": 0.3049580751002552,
+      "roc_auc": 0.7064236938187209,
+      "average_precision": 0.5372654927019649,
+      "ranking_status": "ok",
+      "at_budget": {
+        "top_1pct": {
+          "share": 0.01,
+          "k": 55,
+          "n": 5486,
+          "hits": 48,
+          "precision": 0.8727272727272727,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.8617942726729337,
+          "lift_status": "ok"
+        },
+        "top_5pct": {
+          "share": 0.05,
+          "k": 275,
+          "n": 5486,
+          "hits": 205,
+          "precision": 0.7454545454545455,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.4444492745747977,
+          "lift_status": "ok"
+        },
+        "top_10pct": {
+          "share": 0.1,
+          "k": 549,
+          "n": 5486,
+          "hits": 372,
+          "precision": 0.6775956284153005,
+          "prevalence": 0.3049580751002552,
+          "lift": 2.2219304348394133,
+          "lift_status": "ok"
+        }
+      },
+      "raw_probability": {
+        "brier": 0.1855772702108551,
+        "mean_predicted": 0.32982914994394646,
+        "status": "ok",
+        "log_loss": 0.5546243111310465
+      },
+      "calibrated_probability": {
+        "brier": 0.1850042989219933,
+        "mean_predicted": 0.3113034639135038,
+        "status": "ok",
+        "log_loss": 0.5529643911793118
+      },
+      "model_version": "smoke-20261031T150445Z-f124ab/catboost_ext",
+      "feature_set_version": "ext_v1",
+      "calibration_status": "ok",
+      "selected": false
+    }
+  },
+  "differences_vs_baseline_point": {
+    "lr_core": {
+      "average_precision": 0.13063696244760697,
+      "roc_auc": 0.06890292106360896,
+      "precision_top_5pct_pp": 28.72727272727273,
+      "precision_top_5pct_relative": 0.626984126984127
+    },
+    "catboost_core": {
+      "average_precision": 0.12906472983730494,
+      "roc_auc": 0.06911258852865798,
+      "precision_top_5pct_pp": 28.72727272727273,
+      "precision_top_5pct_relative": 0.626984126984127
+    },
+    "catboost_ext": {
+      "average_precision": 0.13046824960439257,
+      "roc_auc": 0.0714634506891123,
+      "precision_top_5pct_pp": 28.72727272727273,
+      "precision_top_5pct_relative": 0.626984126984127
+    }
+  }
+}
