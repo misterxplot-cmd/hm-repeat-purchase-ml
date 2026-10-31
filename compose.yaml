@@ -1,0 +1,38 @@
+name: hmrp
+
+services:
+  postgres:
+    image: postgres:16.8-bookworm
+    container_name: hmrp-postgres
+    environment:
+      POSTGRES_USER: ${HMRP_PG_USER:-hmrp}
+      POSTGRES_PASSWORD: ${HMRP_PG_PASSWORD:?set HMRP_PG_PASSWORD in .env}
+      POSTGRES_DB: ${HMRP_PG_DB:-hmrp}
+    command:
+      - postgres
+      - -c
+      - shared_buffers=${HMRP_PG_SHARED_BUFFERS:-2GB}
+      - -c
+      - work_mem=${HMRP_PG_WORK_MEM:-256MB}
+      - -c
+      - maintenance_work_mem=${HMRP_PG_MAINTENANCE_WORK_MEM:-1GB}
+      - -c
+      - max_wal_size=${HMRP_PG_MAX_WAL_SIZE:-8GB}
+      - -c
+      - max_parallel_workers_per_gather=${HMRP_PG_PARALLEL_WORKERS:-4}
+      - -c
+      - max_parallel_maintenance_workers=${HMRP_PG_PARALLEL_WORKERS:-4}
+    ports:
+      - "127.0.0.1:${HMRP_PG_PORT:-55432}:5432"
+    shm_size: 1gb
+    volumes:
+      - hmrp_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  hmrp_pgdata:
+    name: hmrp_pgdata

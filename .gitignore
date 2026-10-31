@@ -1,0 +1,26 @@
+# Input task file (not part of the project)
+Claude_Code_HM_Repeat_Purchase_Prompt.md
+*_Prompt.md
+
+# Secrets and local environment
+.env
+.venv/
+.tools/
+*.pem
+
+# Source data, intermediate matrices, local artifacts
+/data/
+/artifacts/*
+!/artifacts/README.md
+
+# Python / tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+build/
+dist/
+catboost_info/
+.coverage
+.pytest_tmp/

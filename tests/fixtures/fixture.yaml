@@ -1,0 +1,75 @@
+# Unit/integration fixture mode: synthetic data, same windows and code as full; tiny model budgets.
+# Results produced with this config are never H&M results.
+mode: fixture
+seed: 3
+
+data:
+  dir: tests/fixtures/data
+  files:
+    transactions: transactions_train.csv
+    customers: customers.csv
+    articles: articles.csv
+  source:
+    urls: {}
+    expected: {}
+
+dataset:
+  sample_fraction: 1.0
+  hash_salt: hmrp-sample-v1
+  hash_buckets: 10000
+
+time:
+  history_days: 90
+  horizon_days: 30
+  step_days: 30
+  grid_start: 2019-01-02
+  grid_end: 2020-08-24
+  dev_validation_cutoffs: [2020-04-26, 2020-05-26, 2020-06-25]
+  calibration_cutoff: 2020-07-25
+  test_cutoff: 2020-08-24
+  # Synthetic daily volume is tiny and noisy: truncation check disabled.
+  truncation_ratio_threshold: 0.0
+
+models:
+  candidates: [lr_core, catboost_core, catboost_ext]
+  diagnostics: [lr_ext]
+  lr:
+    C_grid: [0.1, 1.0]
+    max_iter: 500
+    solver: lbfgs
+  catboost:
+    max_iterations: 60
+    early_stopping_rounds: 10
+    eval_metric: Logloss
+    configs:
+      - {name: d3_lr0.10_l2_3, depth: 3, learning_rate: 0.10, l2_leaf_reg: 3}
+
+selection:
+  metric: average_precision
+  tolerance: 0.005
+  priority: [lr_core, catboost_core, catboost_ext]
+
+evaluation:
+  budgets: [0.01, 0.05, 0.10]
+  primary_budget: 0.05
+  tie_salt: hmrp-tie-v1
+
+calibration:
+  method: platt
+  min_class_count: 5
+
+bootstrap:
+  n_resamples: 20
+  seed: 7
+
+resources:
+  catboost_threads: 2
+  task_type: CPU
+
+sql:
+  explain_analyze_heavy: true
+
+outputs:
+  reports_dir: reports
+  artifacts_dir: artifacts
+  derived_dir: data/derived

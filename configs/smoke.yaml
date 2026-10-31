@@ -1,0 +1,20 @@
+# Smoke: deterministic 1% of real customers (by stable hash), full date range, same windows and code.
+# Differences from full: sample fraction, search budget, bootstrap budget.
+extends: full.yaml
+mode: smoke
+
+dataset:
+  sample_fraction: 0.01
+
+models:
+  catboost:
+    max_iterations: 1000
+    configs:
+      - {name: d4_lr0.10_l2_3, depth: 4, learning_rate: 0.10, l2_leaf_reg: 3}
+      - {name: d6_lr0.10_l2_3, depth: 6, learning_rate: 0.10, l2_leaf_reg: 3}
+
+bootstrap:
+  n_resamples: 50
+
+sql:
+  explain_analyze_heavy: true

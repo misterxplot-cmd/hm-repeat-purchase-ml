@@ -1,0 +1,90 @@
+# Full experiment: all customers of the full transactions_train.csv.
+mode: full
+seed: 20240917
+
+data:
+  # Relative paths are resolved from the project root. Overridden by HNM_DATA_DIR or --data-dir.
+  dir: data/raw
+  files:
+    transactions: transactions_train.csv
+    customers: customers.csv
+    articles: articles.csv
+  source:
+    origin: https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data
+    rules: https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/rules
+    mirror: https://huggingface.co/datasets/microsoft/hnm-search-data
+    mirror_revision: ac68fe6c5372c7f0bbfe0b7a6510f9e17addc81f
+    urls:
+      transactions: https://huggingface.co/datasets/microsoft/hnm-search-data/resolve/main/data/raw/transactions_train.csv
+      customers: https://huggingface.co/datasets/microsoft/hnm-search-data/resolve/main/data/raw/customers.csv
+      articles: https://huggingface.co/datasets/microsoft/hnm-search-data/resolve/main/data/raw/articles.csv
+    # sha256 / size published by the mirror (Hugging Face LFS metadata, tree API)
+    expected:
+      transactions: {sha256: fff5e3b35c1b26016aa0bf2231be9525bc766eed32c94f1653420b465aef84fa, size_bytes: 3488002253}
+      customers: {sha256: abf3450c37ee1c16124e0d3379371153f5371148742efdcfe44c97c0445df6b2, size_bytes: 207135859}
+      articles: {sha256: 25f21882053517f7684ea43f524225a9481a7bb9aab9cf0abfc7fe8c4576a72b, size_bytes: 36127865}
+
+dataset:
+  # Deterministic customer sampling: bucket = int(sha256(salt + ':' + customer_id)[:8], 16) % buckets
+  sample_fraction: 1.0
+  hash_salt: hmrp-sample-v1
+  hash_buckets: 10000
+
+time:
+  history_days: 90
+  horizon_days: 30
+  step_days: 30
+  grid_start: 2019-01-02
+  grid_end: 2020-08-24
+  dev_validation_cutoffs: [2020-04-26, 2020-05-26, 2020-06-25]
+  calibration_cutoff: 2020-07-25
+  test_cutoff: 2020-08-24
+  # Last day is treated as truncated if its rows < threshold x trailing 28-day median.
+  truncation_ratio_threshold: 0.5
+
+models:
+  candidates: [lr_core, catboost_core, catboost_ext]
+  diagnostics: [lr_ext]
+  lr:
+    C_grid: [0.01, 0.1, 1.0]
+    max_iter: 2000
+    solver: lbfgs
+  catboost:
+    max_iterations: 3000
+    early_stopping_rounds: 100
+    eval_metric: Logloss
+    configs:
+      - {name: d4_lr0.10_l2_3, depth: 4, learning_rate: 0.10, l2_leaf_reg: 3}
+      - {name: d6_lr0.10_l2_3, depth: 6, learning_rate: 0.10, l2_leaf_reg: 3}
+      - {name: d6_lr0.05_l2_10, depth: 6, learning_rate: 0.05, l2_leaf_reg: 10}
+      - {name: d8_lr0.10_l2_10, depth: 8, learning_rate: 0.10, l2_leaf_reg: 10}
+
+selection:
+  metric: average_precision
+  tolerance: 0.005
+  priority: [lr_core, catboost_core, catboost_ext]
+
+evaluation:
+  budgets: [0.01, 0.05, 0.10]
+  primary_budget: 0.05
+  tie_salt: hmrp-tie-v1
+
+calibration:
+  method: platt
+  min_class_count: 50
+
+bootstrap:
+  n_resamples: 500
+  seed: 7
+
+resources:
+  catboost_threads: 8
+  task_type: CPU
+
+sql:
+  explain_analyze_heavy: true
+
+outputs:
+  reports_dir: reports
+  artifacts_dir: artifacts
+  derived_dir: data/derived
