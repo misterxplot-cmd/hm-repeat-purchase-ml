@@ -127,7 +127,10 @@ fold). Ранжирование всех моделей — по `raw_score`; о
 
 ## Установка и запуск
 
-Проверено на Windows 11, Python 3.12.3, Docker Desktop (Engine 29.9), PostgreSQL 16.8.
+Проверено на Windows 11, Python 3.12.3, Docker Desktop (Engine 29.9), PostgreSQL 16.8: свежий клон → установка из
+`requirements.lock` → `hmrp doctor` → `python -m pytest` (43 passed); полный pipeline — в этом же окружении.
+На Windows клонируйте по короткому пути (≲ 100 символов): `ipykernel` → `debugpy` содержит длинные пути, и при
+глубоком расположении `pip install` упирается в ограничение MAX_PATH (260).
 
 ```powershell
 git clone https://github.com/misterxplot-cmd/hm-repeat-purchase-ml.git
